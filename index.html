@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Your Name — Portfolio</title>
+  <meta name="description" content="Personal portfolio / resume website" />
+
+  <!-- Favicon (replace with your icon) -->
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0f1724; /* dark navy */
+      --card:#0b1220;
+      --muted:#9aa4b2;
+      --accent:#7c3aed; /* purple */
+      --glass: rgba(255,255,255,0.04);
+      --radius:14px;
+      color-scheme: dark;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: linear-gradient(180deg, #081028 0%, #07101a 100%);
+      color:#e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding:28px;
+    }
+
+    .container{max-width:1100px;margin:0 auto}
+
+    header{
+      display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;
+    }
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{
+      width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#4f46e5);display:flex;align-items:center;justify-content:center;font-weight:700;color:white;box-shadow:0 6px 20px rgba(124,58,237,0.18)
+    }
+    nav a{color:var(--muted);text-decoration:none;margin-left:18px;font-weight:600}
+    nav a:hover{color:#fff}
+
+    .hero{
+      display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:center;margin-bottom:28px
+    }
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr;}
+    }
+
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:var(--radius);box-shadow:0 6px 30px rgba(2,6,23,0.6)}
+
+    .intro h1{font-size:32px;margin:0 0 6px 0}
+    .intro p.lead{margin:0;color:var(--muted)}
+    .cta{display:flex;gap:12px;margin-top:18px}
+    .btn{padding:10px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:700}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),#4f46e5);color:#fff}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+
+    .profile{
+      display:flex;flex-direction:column;gap:14px;align-items:center;text-align:center
+    }
+    .avatar{width:160px;height:160px;border-radius:18px;background:linear-gradient(135deg,#0ea5a4,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:700;color:white}
+    .stats{display:flex;gap:12px}
+    .stat{background:var(--glass);padding:8px 12px;border-radius:10px;color:var(--muted);font-weight:700}
+
+    /* Projects */
+    .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px}
+    @media (max-width:700px){.projects-grid{grid-template-columns:1fr}}
+    .project{padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02)}
+    .project h3{margin:0 0 8px 0}
+    .tags{display:flex;gap:8px;flex-wrap:wrap}
+    .tag{font-size:12px;padding:6px 8px;border-radius:10px;background:rgba(255,255,255,0.03);color:var(--muted)}
+
+    /* About + skills */
+    .about{display:grid;grid-template-columns:1fr 300px;gap:16px;margin-top:18px}
+    @media (max-width:900px){.about{grid-template-columns:1fr}}
+    .skills{display:flex;flex-direction:column;gap:8px}
+    .skill-bar{height:10px;background:rgba(255,255,255,0.04);border-radius:999px;overflow:hidden}
+    .skill-bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#60a5fa)}
+
+    footer{margin-top:30px;display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:14px}
+
+    /* Contact form */
+    form{display:grid;gap:10px}
+    input,textarea{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px;border-radius:8px;color:inherit}
+
+    /* Tiny utilities */
+    .socials{display:flex;gap:10px}
+    .chip{padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.02);font-weight:700}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">RN</div>
+        <div>
+          <div style="font-weight:800">Your Name</div>
+          <div style="font-size:12px;color:var(--muted)">Frontend engineer • Designer • Open-source</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <button class="btn ghost" id="themeToggle">Toggle Theme</button>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="card intro">
+        <h1>Hi — I'm <span id="nameInline">Your Name</span>.</h1>
+        <p class="lead">I build elegant, accessible web apps and delightful user experiences. I focus on performance, clean design and maintainable code.</p>
+
+        <div class="cta">
+          <a class="btn primary" href="#contact">Hire me</a>
+          <a class="btn ghost" href="resume.pdf" download>Download Resume</a>
+        </div>
+
+        <div style="margin-top:18px">
+          <h4 style="margin:0 0 8px 0">Featured projects</h4>
+          <div class="projects-grid" id="featured">
+            <article class="project">
+              <h3>Project One</h3>
+              <p style="margin:0 0 8px 0;color:var(--muted);font-size:14px">Short description — what it does and why it matters.</p>
+              <div class="tags"><span class="tag">React</span><span class="tag">TypeScript</span></div>
+            </article>
+
+            <article class="project">
+              <h3>Project Two</h3>
+              <p style="margin:0 0 8px 0;color:var(--muted);font-size:14px">Short description — quick context and impact.</p>
+              <div class="tags"><span class="tag">Design</span><span class="tag">Next.js</span></div>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <aside class="card profile">
+        <div class="avatar">YN</div>
+        <div style="font-weight:800">Your Name</div>
+        <div style="color:var(--muted);font-size:14px">Location — City, Country</div>
+        <div class="stats">
+          <div class="stat">5+ yrs</div>
+          <div class="stat">12 projects</div>
+          <div class="stat">Open to work</div>
+        </div>
+        <div class="socials">
+          <a class="chip" href="#">GitHub</a>
+          <a class="chip" href="#">LinkedIn</a>
+          <a class="chip" href="#">Twitter</a>
+        </div>
+      </aside>
+    </section>
+
+    <section id="about" class="about">
+      <div class="card">
+        <h2 style="margin-top:0">About</h2>
+        <p style="color:var(--muted)">I’m a frontend engineer who loves building fast, accessible, and beautiful websites. I spend my time crafting UI, improving performance, and mentoring younger devs. Below are a few skills I use daily.</p>
+
+        <div style="margin-top:12px" class="skills">
+          <div>
+            <div style="font-weight:700">JavaScript</div>
+            <div class="skill-bar" aria-hidden><i style="width:90%"></i></div>
+          </div>
+          <div>
+            <div style="font-weight:700">CSS / Design</div>
+            <div class="skill-bar" aria-hidden><i style="width:80%"></i></div>
+          </div>
+          <div>
+            <div style="font-weight:700">React / Next</div>
+            <div class="skill-bar" aria-hidden><i style="width:85%"></i></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="card">
+        <h3 style="margin-top:0">Get in touch</h3>
+        <p style="color:var(--muted)">Prefer email? <a href="mailto:you@example.com">you@example.com</a></p>
+        <form id="contact" action="mailto:you@example.com" method="post" enctype="text/plain">
+          <input type="text" name="name" placeholder="Your name" required />
+          <input type="email" name="email" placeholder="Your email" required />
+          <textarea name="message" rows="5" placeholder="Message" required></textarea>
+          <div style="display:flex;gap:10px">
+            <button class="btn primary" type="submit">Send</button>
+            <button class="btn ghost" type="reset">Reset</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="year"></span> Your Name</div>
+      <div style="color:var(--muted)">Built with ❤️ • Single-file starter</div>
+    </footer>
+  </div>
+
+  <script>
+    // Small JS helpers
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Theme toggle (light mode is subtle)
+    const themeToggle = document.getElementById('themeToggle');
+    let light = false;
+    themeToggle.addEventListener('click', ()=>{
+      light = !light;
+      if(light){
+        document.documentElement.style.setProperty('--bg','#f7fafc');
+        document.body.style.background = 'linear-gradient(180deg,#f8fafc,#eef2ff)';
+        document.body.style.color = '#0b1220';
+        document.documentElement.style.setProperty('--card','#ffffff');
+        document.documentElement.style.setProperty('--muted','#475569');
+      } else {
+        document.documentElement.style.removeProperty('--bg');
+        document.body.style.background = 'linear-gradient(180deg, #081028 0%, #07101a 100%)';
+        document.body.style.color = '#e6eef8';
+        document.documentElement.style.setProperty('--card','#0b1220');
+        document.documentElement.style.setProperty('--muted','#9aa4b2');
+      }
+    });
+
+    // Small convenience: let user press 'e' to edit name inline (dev-only)
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'e'){
+        const name = prompt('Your display name', document.getElementById('nameInline').textContent);
+        if(name) document.getElementById('nameInline').textContent = name;
+      }
+    });
+  </script>
+</body>
+</html>
